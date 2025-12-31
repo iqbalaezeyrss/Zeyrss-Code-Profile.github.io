@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+        <title>Zeyrss Code Profile</title>
+
+        <script src="https://unpkg.com/feather-icons"></script>
+
+        <script src="https://kit.fontawesome.com/70891ee4fd.js" crossorigin="anonymous"></script>
+
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+            :root
+            {
+                --bg-color: #0f192f;
+                --second-bg-color: #323946;
+                --text-color: #ffffffe2;
+                --main-color: rgb(18, 227, 255);
+                --accent-purple: #9b5de5;
+                --accent-pink: #f15bb5;
+            }
+            *
+            {
+                margin: 0; padding: 0; box-sizing: border-box;
+                text-decoration: none; outline: none; border: none;
+                font-family: "Poppins", sans-serif; scroll-behavior: smooth;
+            }
+            html { font-size: 62.5%; overflow-x: hidden; width: 100%; }
+            body { background: var(--bg-color); color: var(--text-color); width: 100%; overflow-x: hidden; }
+            section { min-height: 100vh; padding: 10rem 9% 2rem; }
+            #intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--bg-color);
+                z-index: 10000; display: flex; flex-direction: column; justify-content: center; align-items: center;
+                text-align: center;
+                transition: opacity 1s ease-in-out, visibility 1s;
+                padding: 2rem;
+            }
+
+            .hide-intro {
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+            }
+
+            .intro-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+            }
+
+            .intro-content img {
+                width: 250px;
+                height: 250px;
+                object-fit: cover;
+                border-radius: 50%;
+                border: 6px solid var(--main-color);
+                box-shadow: 0 0 50px var(--main-color);
+                opacity: 0;
+                transform: scale(0);
+                animation: popInImage 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            }
+
+            @keyframes popInImage {
+                100% { opacity: 1; transform: scale(1); }
+            }
+
+            .intro-text {
+                font-size: 4rem;
+                font-weight: 700;
+                font-style: italic;
+                color: var(--main-color);
+                text-shadow: 0 0 20px rgba(0,0,0,0.5);
+                letter-spacing: 1px;
+                min-height: 60px;
+                text-transform: uppercase;
+                margin-bottom: 1rem;
+            }
+            #enter-btn
+            {
+                opacity: 0;
+                animation: fadeInBtn 1s ease forwards;
+                animation-delay: 1.5s;
+                transform: translateY(20px);
+                font-size: 1.8rem;
+                padding: 1.2rem 3.5rem;
+                cursor: pointer;
+            }
+            @keyframes fadeInBtn
+            {
+                to { opacity: 1; transform: translateY(0); }
+            }
+            @media (max-width: 768px)
+            {
+                .intro-content img {
+                    width: 180px;
+                    height: 180px;
+                    border-width: 4px;
+                    box-shadow: 0 0 30px var(--main-color);
+                }
+                .intro-text {
+                    font-size: 2.2rem;
+                    min-height: 40px;
+                }
+            }
+            .header
+            {
+                position: fixed; top: 0; left: 0; width: 100%; padding: 2rem 9%;
+                background: var(--bg-color); display: flex; justify-content: space-between; align-items: center;
+                z-index: 1000; transition: .3s;
+            }
+            .header.sticky { background: var(--second-bg-color); box-shadow: 0 0 1rem rgba(0,0,0,0.2); padding: 1.2rem 9%; }
+            .logo { font-size: 2.5rem; color: var(--text-color); font-weight: 600; cursor: pointer; font-style: italic; }
+            .logo span { color: var(--main-color); }
+            .navbar a { font-size: 1.7rem; color: var(--text-color); margin-left: 4rem; transition: 0.3s; font-weight: 500; }
+            .navbar a:hover, .navbar a.active { color: var(--main-color); }
+            #menu-icon { font-size: 3.6rem; color: var(--text-color); display: none; cursor: pointer; width: 2.8rem; height: 2.8rem; }
+            .home { display: flex; align-items: center; justify-content: center; gap: 12rem; }
+            .home-content { flex: 1; max-width: 65rem; }
+            .home-content h3 { font-size: 3.2rem; font-weight: 700; }
+            .home-content h3:nth-of-type(2) { margin-bottom: 2rem; white-space: nowrap; display: inline-block; width: 52rem; }
+            .home-content h3 span.multiple-text { color: var(--main-color); }
+            .home-content h1 { font-size: 5.6rem; font-weight: 700; line-height: 1.3; color: var(--text-color); }
+            .home-content h1 span { color: var(--main-color); }
+            .home-content p { font-size: 1.6rem; margin-bottom: 3rem; }
+            .social-media a {
+                display: inline-flex; justify-content: center; align-items: center;
+                width: 4rem; height: 4rem; background: transparent;
+                border: .2rem solid var(--main-color); border-radius: 50%;
+                font-size: 2rem; color: var(--main-color); margin: 0 1.5rem 3rem 0;
+                transition: 0.5s ease;
+            }
+            .social-media a svg { width: 2rem; height: 2rem; }
+            .social-media a:hover { background: var(--main-color); color: var(--second-bg-color); box-shadow: 0 0 1rem var(--main-color); }
+            .btn {
+                display: inline-flex; align-items: center; justify-content: center; gap: 1rem;
+                padding: 1rem 2.8rem; background: var(--main-color); border-radius: 4rem;
+                box-shadow: 0 0 1rem var(--main-color); font-size: 1.6rem;
+                color: var(--second-bg-color); letter-spacing: .1rem; font-weight: 600;
+                transition: 0.5s ease; border: 2px solid var(--main-color);
+            }
+            .btn:hover { box-shadow: none; background: transparent; color: var(--main-color); }
+            .btn svg { width: 2rem; height: 2rem; }
+            .home-img { flex: 1; display: flex; justify-content: center; align-items: center; position: relative; }
+            .home-img .img-gradient { position: relative; width: 100%; max-width: 380px; display: flex; justify-content: center; z-index: 1; }
+            .home-img .img-gradient::after {
+                content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                width: 74%; aspect-ratio: 1 / 1; border-radius: 50%;
+                border: 2px solid var(--main-color);
+                box-shadow: 0 0 20px var(--main-color), 0 0 60px var(--main-color);
+                z-index: -1; animation: pulseGlow 3s ease-in-out infinite alternate;
+            }
+            @keyframes pulseGlow {
+                0% { box-shadow: 0 0 20px var(--main-color), 0 0 60px var(--main-color); opacity: 0.8; }
+                100% { box-shadow: 0 0 40px var(--main-color), 0 0 80px var(--main-color); opacity: 1; }
+            }
+            .home-img .img-gradient img {
+                width: 100%; animation: floatImage 4s ease-in-out infinite;
+                -webkit-mask-image: radial-gradient(circle at center, black 60%, transparent 72%);
+                mask-image: radial-gradient(circle at center, black 60%, transparent 72%);
+            }
+            @keyframes floatImage { 0% { transform: translateY(0); } 50% { transform: translateY(-2.4rem); } 100% { transform: translateY(0); } }
+            .about { display: flex; justify-content: center; align-items: center; gap: 4rem; background: var(--second-bg-color); }
+            .about-img { flex: 1; display: flex; justify-content: center; align-items: center; }
+            .about-img img {
+                width: 35vw; max-width: 400px; border-radius: 2rem;
+                border: .2rem solid var(--main-color); box-shadow: 0 0 15px var(--main-color);
+                transition: .5s ease;
+            }
+            .about-img img:hover { transform: scale(1.02); box-shadow: 0 0 25px var(--main-color); }
+            .about-content { flex: 1; text-align: left; }
+            .heading { text-align: center; font-size: 4.5rem; margin-bottom: 3rem; }
+            .heading span { color: var(--main-color); }
+            .about-content h2 { text-align: left; line-height: 1.2; }
+            .about-content h3 { font-size: 2.6rem; }
+            .about-content p { font-size: 1.6rem; margin: 2rem 0 3rem; }
+            .services h2 { margin-bottom: 5rem; }
+            .services-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
+            .services-container .services-box {
+                background: var(--second-bg-color); padding: 3rem 2rem 4rem;
+                border-radius: 2rem; text-align: center; border: .2rem solid var(--bg-color);
+                transition: .5s ease; height: 100%; display: flex; flex-direction: column; justify-content: space-between;
+            }
+            .services-box-content { flex-grow: 1; display: flex; flex-direction: column; align-items: center; }
+            .services-container .services-box:hover { border-color: var(--main-color); transform: translateY(-10px); }
+            .services-box svg { width: 6rem; height: 6rem; color: var(--main-color); margin-bottom: 1rem; }
+            .services-box h3 { font-size: 2.6rem; }
+            .services-box p { font-size: 1.6rem; margin: 1rem 0 3rem; }
+            .portfolio { 
+                background: var(--second-bg-color); 
+                padding-bottom: 5rem; 
+            }
+            .portfolio-container { 
+                display: grid; 
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+                gap: 2.5rem; 
+            }
+            .portfolio-box {
+                position: relative; 
+                border-radius: 2rem; 
+                box-shadow: 0 0 1rem var(--bg-color);
+                overflow: hidden; 
+                display: flex;
+                aspect-ratio: 4 / 3;
+                background: #20242d;
+                border: 2px solid var(--main-color);
+            }
+            .portfolio-box img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; 
+                transition: transform 0.5s ease;
+            }
+            .portfolio-box:hover img {
+                transform: scale(1.1);
+            }
+            .services-box i {
+                color: var(--main-color) !important;
+                margin-bottom: 1rem;
+                transition: color 0.3s ease, transform 0.3s ease;
+            }
+            .services-box:hover i {
+                text-shadow: 0 0 20px var(--main-color);
+                transform: scale(1.1);
+            }
+            .portfolio-layer {
+                position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+                background: linear-gradient(rgba(0,0,0,.1), var(--second-bg-color));
+                display: flex; justify-content: center; align-items: center;
+                flex-direction: column; text-align: center; padding: 0 4rem;
+                transform: translateY(100%); transition: .5s ease;
+            }
+            .portfolio-box:hover .portfolio-layer { transform: translateY(0); }
+            .portfolio-layer h4 { font-size: 3rem; color: var(--main-color); text-shadow: 0 0 10px rgba(0,0,0,0.8); }
+            .portfolio-layer p { font-size: 1.6rem; margin: .3rem 0 1rem; color: #fff; font-weight: 500; }
+            .portfolio-layer a { display: inline-flex; justify-content: center; align-items: center; width: 5rem; height: 5rem; background: #fff; border-radius: 50%; cursor: pointer; }
+            .portfolio-layer a svg { width: 2rem; height: 2rem; color: #333; }
+            .image-modal {
+                display: none; 
+                position: fixed; z-index: 10001;
+                left: 0; top: 0; width: 100%; height: 100%;
+                background-color: rgba(0, 0, 0, 0.9);
+                justify-content: center; align-items: center;
+                opacity: 0; transition: opacity 0.3s ease;
+            }
+            .image-modal.show { display: flex; opacity: 1; }
+            .modal-content {
+                max-width: 90%; max-height: 90%;
+                border-radius: 10px;
+                border: 2px solid var(--main-color);
+                box-shadow: 0 0 20px var(--main-color);
+                transform: scale(0.7); transition: transform 0.3s ease;
+                object-fit: contain;
+            }
+            .image-modal.show .modal-content { transform: scale(1); }
+            .close-modal {
+                position: absolute; top: 20px; right: 35px;
+                color: #f1f1f1; font-size: 40px; font-weight: bold;
+                cursor: pointer; transition: 0.3s;
+                z-index: 10002;
+            }
+            .close-modal:hover { color: var(--main-color); }
+            .portfolio-box:hover img {
+                transform: scale(1.1);
+            }
+            .portfolio-layer {
+                position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+                background: linear-gradient(rgba(0,0,0,.1), var(--second-bg-color));
+                display: flex; justify-content: center; align-items: center;
+                flex-direction: column; text-align: center; padding: 0 4rem;
+                transform: translateY(100%); transition: .5s ease;
+            }
+            .portfolio-box:hover .portfolio-layer { transform: translateY(0); }
+            .portfolio-layer h4 { font-size: 3rem; color: var(--main-color); text-shadow: 0 0 10px rgba(0,0,0,0.8); }
+            .portfolio-layer p { font-size: 1.6rem; margin: .3rem 0 1rem; color: #fff; font-weight: 500; }
+            .portfolio-layer a { display: inline-flex; justify-content: center; align-items: center; width: 5rem; height: 5rem; background: #fff; border-radius: 50%; }
+            .portfolio-layer a svg { width: 2rem; height: 2rem; color: #333; }
+            .portfolio-layer {
+                position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+                background: linear-gradient(rgba(0,0,0,.8), var(--second-bg-color));
+                display: flex; justify-content: center; align-items: center;
+                flex-direction: column; text-align: center; padding: 0 4rem;
+                transform: translateY(100%); transition: .5s ease;
+            }
+            .portfolio-box:hover .portfolio-layer { transform: translateY(0); }
+            .portfolio-layer h4 { font-size: 3rem; color: var(--main-color); }
+            .portfolio-layer p { font-size: 1.6rem; margin: .3rem 0 1rem; color: #fff; }
+            .portfolio-layer a { display: inline-flex; justify-content: center; align-items: center; width: 5rem; height: 5rem; background: #fff; border-radius: 50%; }
+            .portfolio-layer a svg { width: 2rem; height: 2rem; color: #333; }
+            .contact form { max-width: 70rem; margin: 1rem auto; text-align: center; margin-bottom: 3rem; }
+            .contact form .input-box { display: flex; justify-content: space-between; flex-wrap: wrap; }
+            .contact form .input-box input, .contact form textarea {
+                width: 100%; padding: 1.5rem; font-size: 1.6rem; color: var(--text-color);
+                background: var(--second-bg-color); border-radius: .8rem; margin: .7rem 0;
+            }
+            .contact form .input-box input { width: 49%; }
+            .contact form textarea { resize: none; height: 200px; }
+            .footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; padding: 2rem 9%; background: var(--second-bg-color); }
+            .footer-text p { font-size: 1.6rem; }
+            .footer-iconTop a { display: inline-flex; justify-content: center; align-items: center; padding: .8rem; background: var(--main-color); border-radius: .8rem; transition: .5s ease; }
+            .footer-iconTop a:hover { box-shadow: 0 0 1rem var(--main-color); }
+            .footer-iconTop a svg { width: 2.4rem; height: 2.4rem; color: var(--second-bg-color); }
+            .wa-modal { position: fixed; inset: 0; background: rgba(15, 25, 47, 0.9); display: flex; align-items: center; justify-content: center; z-index: 9999; opacity: 0; pointer-events: none; transition: .4s ease; }
+            .wa-modal.active { opacity: 1; pointer-events: auto; }
+            .wa-box { background: var(--second-bg-color); padding: 3rem 4rem; border-radius: 1.5rem; text-align: center; box-shadow: 0 0 25px var(--main-color); border: 1px solid var(--main-color); }
+            .wa-box h3 { font-size: 2.4rem; color: var(--main-color); margin-bottom: 1rem; }
+            .wa-box p { font-size: 1.6rem; margin-bottom: 2rem; }
+            .theme-wrapper {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                z-index: 9999;
+                display: flex;
+                flex-direction: column-reverse;
+                align-items: center;
+                gap: 15px;
+                touch-action: none; 
+            }
+            .theme-btn {
+                width: 50px;
+                height: 50px;
+                background: var(--second-bg-color);
+                border: 2px solid var(--main-color);
+                border-radius: 50%;
+                color: var(--main-color);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: grab;
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+                transition: transform 0.2s, border-color 0.3s, color 0.3s;
+                user-select: none;
+                -webkit-tap-highlight-color: transparent;
+            }
+            .theme-btn:active {
+                cursor: grabbing;
+                transform: scale(0.95);
+            }
+            .theme-btn svg {
+                width: 24px;
+                height: 24px;
+                animation: spinGear 8s linear infinite;
+            }
+            @keyframes spinGear { 100% { transform: rotate(360deg); } }
+            .theme-colors {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                background: rgba(15, 25, 47, 0.9);
+                padding: 10px;
+                border-radius: 50px;
+                border: 1px solid var(--main-color);
+                backdrop-filter: blur(5px);
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(20px) scale(0.8);
+                transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+            .theme-colors.active {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0) scale(1);
+            }
+            .color-box {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                cursor: pointer;
+                border: 2px solid rgba(255,255,255,0.8);
+                transition: transform 0.2s;
+            }
+            .color-box:hover {
+                transform: scale(1.25);
+                border-color: #fff;
+            }
+            .rgb-btn {
+                background: linear-gradient(135deg, red, orange, yellow, lime, cyan, blue, magenta, red);
+                background-size: 400% 400%;
+                animation: gradientBG 3s ease infinite;
+            }
+            @keyframes gradientBG { 0% {background-position: 0% 50%;} 50% {background-position: 100% 50%;} 100% {background-position: 0% 50%;} }
+            @media (max-width: 1200px) { html { font-size: 55%; } }
+            @media (max-width: 991px) {
+                .header { padding: 2rem 3%; }
+                section { padding: 10rem 3% 2rem; }
+                .services { padding-bottom: 7rem; }
+                .footer { padding: 2rem 3%; }
+                .home { flex-direction: column; gap: 4rem; text-align: center; }
+                .home-content { padding-top: 2rem; max-width: 100%; }
+                .home-content h3 { font-size: 2.8rem; }
+                .home-content h3:nth-of-type(2) { width: auto; min-width: 0; display: block; }
+                .home-img { width: 100%; margin: 2rem auto; }
+                .home-img .img-gradient img { width: 55vw; max-width: 400px; }
+                .about { flex-direction: column; text-align: center; }
+                .about-content h2 { text-align: center; }
+                .about-img img { width: 70vw; margin-bottom: 2rem; }
+            }
+            @media (max-width: 768px) {
+                #menu-icon { display: block; }
+                .header { padding: 1.5rem 4%; }
+                .header.sticky { padding: 1.2rem 4%; }
+                .navbar {
+                    position: absolute; top: 100%; left: 0; width: 100%; padding: 1rem 3%;
+                    background: var(--bg-color); border-top: .1rem solid rgba(0,0,0,.2);
+                    box-shadow: 0 .5rem 1rem rgba(0,0,0,.2); visibility: hidden; opacity: 0;
+                    transform: translateY(-20px); transition: all 0.4s ease-in-out; 
+                }
+                .navbar.active { visibility: visible; opacity: 1; transform: translateY(0); }
+                .navbar a { display: block; font-size: 2rem; margin: 3rem 0; }
+                section { padding: 10rem 4% 2rem; }
+                .home { gap: 5rem; }
+                .home-content { flex-direction: column; align-items: center; }
+                .home-content h3 { font-size: 2.4rem; letter-spacing: -0.5px; }
+                .home-content h3:nth-of-type(2) { width: auto; min-width: 0; white-space: nowrap; }
+                .home-content h1 { font-size: 5rem; }
+                .home-img .img-gradient img { width: 75vw; max-width: 350px; }
+                .portfolio-container { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+                .portfolio-box { border-width: 1px; }
+                .contact form .input-box input { width: 100%; }
+                .footer { flex-direction: column; justify-content: center; text-align: center; gap: 1.5rem; padding: 2.5rem 4%; }
+                .footer-text { width: 100%; }
+                .social-media a { margin: 0 1rem 3rem 1rem; }
+                .portfolio-layer { padding: 0 1rem; }
+                .portfolio-layer h4 { font-size: 1.4rem; }
+                .portfolio-layer p { font-size: 1rem; margin: 0.2rem 0 0.5rem; }
+                .portfolio-layer a { width: 3.5rem; height: 3.5rem; }
+                .portfolio-layer a svg { width: 1.5rem; height: 1.5rem; }
+            }
+            @media (max-width: 450px) {
+                html { font-size: 50%; }
+                .home-content h3 { font-size: 2.2rem; letter-spacing: -1px; }
+                .home-content h1 { font-size: 4rem; }
+                .home-img .img-gradient img { width: 85vw; max-width: 320px; }
+                .theme-wrapper { bottom: 20px; right: 20px; }
+                .theme-btn { width: 45px; height: 45px; }
+            }
+        </style>
+    </head>
+    <body>
+        <audio id="bg-music" src="Sound Welcome Zeyrss Code.mp3"></audio>
+        <div id="intro-overlay">
+            <div class="intro-content">
+                <img src="Logo-Zeyrss/Zeyrss-Logo.png" alt="Intro Profile">
+                <h2 class="intro-text"></h2>
+                <button id="enter-btn" class="btn">Enter Profile</button>
+            </div>
+        </div>
+        <header class="header">
+            <a href="https://www.tiktok.com/@zeyrss?_r=1&_t=ZS-92gEDTBSDgn" class="logo">Zeyrss<span>Code</span>.</a>
+            <i id="menu-icon" data-feather="menu"></i>
+            <nav class="navbar">
+                <a href="#home" class="active">Home</a>
+                <a href="#about">About</a>
+                <a href="#my-content">Content</a>
+                <a href="#my-rooms">My Rooms</a>
+                <a href="#Comment">Comment</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </header>
+        <section class="home" id="home">
+            <div class="home-content">
+                <h3>Hello It's Me</h3>
+                <h1>Zeyrss <span>Code</span></h1>
+                <h3>And I'm a <span class="multiple-text"></span></h3>
+                <p></p>
+                <div class="social-media">
+                    <a href="https://www.tiktok.com/@zeyrss?_r=1&_t=ZS-92gEDTBSDgn" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://youtube.com/@zeyrss_code?si=g9G-q4zDCQIELbsA" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/zeyrss.code?igsh=MTl5b3M5eDdqdjgwZw==" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/share/164Cx6nB9S/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+                <a href="https://whatsapp.com/channel/0029VbBltGC9RZAWR116CM2G" class="btn">
+                    <i class="fa-brands fa-whatsapp fa-xl"></i> My Community
+                </a>
+            </div>
+            <div class="home-img">
+                <div class="img-gradient">
+                    <img src="Logo-Zeyrss/Zeyrss-Logo.png" alt="Zeyrss Code Profile" />
+                </div>
+            </div>
+        </section>
+        <section class="about" id="about">
+            <div class="about-img">
+                <img src="Logo-Zeyrss/Zeyrss-About-Me.png" alt="Zeyrss Code About Me" />
+            </div>
+            <div class="about-content">
+                <h2 class="heading">About <span>Me</span></h2>
+                <p>I am <strong>Zeyrss Code</strong>, a web developer with strong knowledge in both Front-End and Back-End development. I focus on building functional, responsive, and well-structured websites that deliver a good user experience and reliable performance.</p>
+                <p>On the front-end, I work on designing and developing clean, modern interfaces that are easy to use and adaptable across different devices and browsers. On the back-end, I handle server-side logic, data processing, and database management to ensure the system runs efficiently and supports the website's functionality.</p>
+                <p>I enjoy learning new technologies and improving my skills through hands-on projects and real-world problem solving. My goal is to continuously grow as a web developer and contribute to creating effective and scalable web solutions.</p>
+                <a href="main-html/about-me.html" class="btn">Read More</a>
+            </div>
+        </section>
+        <section class="Portfolio-Showcase" id="my-content">
+            <h2 class="heading">My <span>Content</span></h2>
+            <div class="services-container">
+                <div class="services-box">
+                    <div class="services-box-content">
+                        <i class="fa-brands fa-tiktok fa-fade fa-5x"></i>
+                        <h3>TikTok Content</h3>
+                        <p>Menciptakan konten kreatif, informatif, dan konsisten untuk membangun kepercayaan serta engagement audiens.</p>
+                    </div>
+                    <a href="main-html/tiktok.html" class="btn">View Content</a>
+                </div>
+                <div class="services-box">
+                    <div class="services-box-content">
+                        <i class="fa-solid fa-store fa-fade fa-5x"></i>
+                        <h3>Affiliate Marketing</h3>
+                        <p>Membantu audiens menemukan produk terbaik melalui rekomendasi yang jujur, relevan, dan bernilai.</p>
+                    </div>
+                    <a href="main-html/affiliate.html" class="btn">View Market</a>
+                </div>
+                <div class="services-box">
+                    <div class="services-box-content">
+                        <i class="fa-brands fa-youtube fa-fade fa-5x"></i>
+                        <h3>YouTube Content</h3>
+                        <p>Menyajikan video edukatif dan inspiratif yang membahas pengalaman, insight, dan peluang di dunia digital.</p>
+                    </div>
+                    <a href="main-html/youtube.html" class="btn">View Content</a>
+                </div>
+            </div>
+        </section>
+        <section class="portfolio" id="my-rooms">
+            <h2 class="heading">My <span>Rooms</span></h2>
+            <div class="portfolio-container">
+                <div class="portfolio-box">
+                    <img src="foto-my-rooms/01.png" alt="Room 1">
+                    <div class="portfolio-layer">
+                        <h4>Gaming Setup</h4>
+                        <p>Lihat Detail Gambar</p>
+                        <a onclick="return false;"><i data-feather="eye"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-box">
+                    <img src="foto-my-rooms/02.png" alt="Room 2">
+                    <div class="portfolio-layer">
+                        <h4>Gaming Setup</h4>
+                        <p>Lihat Detail Gambar</p>
+                        <a onclick="return false;"><i data-feather="eye"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-box">
+                    <img src="foto-my-rooms/03.png" alt="Room 3">
+                    <div class="portfolio-layer">
+                        <h4>Gaming Setup</h4>
+                        <p>Lihat Detail Gambar</p>
+                        <a onclick="return false;"><i data-feather="eye"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-box">
+                    <img src="foto-my-rooms/04.png" alt="Room 4">
+                    <div class="portfolio-layer">
+                        <h4>Gaming Setup</h4>
+                        <p>Lihat Detail Gambar</p>
+                        <a onclick="return false;"><i data-feather="eye"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-box">
+                    <img src="foto-my-rooms/05.png" alt="Room 5">
+                    <div class="portfolio-layer">
+                        <h4>Gaming Setup</h4>
+                        <p>Lihat Detail Gambar</p>
+                        <a onclick="return false;"><i data-feather="eye"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-box">
+                    <img src="foto-my-rooms/06.png" alt="Room 6">
+                    <div class="portfolio-layer">
+                        <h4>Gaming Setup</h4>
+                        <p>Lihat Detail Gambar</p>
+                        <a onclick="return false;"><i data-feather="eye"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div id="imageModal" class="image-modal">
+            <span class="close-modal">&times;</span>
+            <img class="modal-content" id="img01">
+        </div>
+        <section class="contact" id="contact">
+            <h2 class="heading">Contact <span>Me</span></h2>
+            <form id="contactForm">
+                <div class="input-box">
+                    <input type="text" id="nama" placeholder="Enter your name" required />
+                    <input type="text" id="pembahasan" placeholder="Topic of conversation" required />
+                </div>
+                <textarea id="pesan" cols="30" rows="10" placeholder="Enter your message" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </section>
+        <div id="waModal" class="wa-modal">
+          <div class="wa-box">
+            <h3>✅ Message Sent</h3>
+            <p>Your message has been prepared for WhatsApp.</p>
+            <button id="waOk" class="btn">OK</button>
+          </div>
+        </div>
+        <footer class="footer">
+            <div class="footer-text">
+                <p>Copyright &copy; 2026 by Zeyrss.Code | All Rights Reserved</p>
+            </div>
+            <div class="footer-iconTop">
+                <a href="#home"><i class="fa-solid fa-angles-up fa-bounce fa-2x" style="color: #000000;"></i></a>
+            </div>
+        </footer>
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+        <div class="theme-wrapper" id="themeWrapper">
+            <div class="theme-colors" id="themeColors">
+                <div class="color-box" style="background: rgb(18, 227, 255);" onclick="setColor('rgb(18, 227, 255)')"></div>
+                <div class="color-box" style="background: rgb(132, 132, 130);" onclick="setColor('rgb(132, 132, 130)')"></div>
+                <div class="color-box" style="background: rgb(3, 252, 61);" onclick="setColor('rgb(3, 252, 61)')"></div>
+                <div class="color-box" style="background: rgb(255, 0, 13);" onclick="setColor('rgb(255, 0, 13)')"></div>
+                <div class="color-box" style="background: rgb(255, 0, 234);" onclick="setColor('rgb(255, 0, 234)')"></div>
+                <div class="color-box rgb-btn" onclick="startRgbMode()"></div>
+            </div>
+            <div class="theme-btn" id="themeBtn">
+                <i data-feather="settings"></i>
+            </div>
+        </div>
+        <script>
+            feather.replace();
+
+            const introOverlay = document.getElementById('intro-overlay');
+            const enterBtn = document.getElementById('enter-btn');
+            const bgMusic = document.getElementById('bg-music');
+            
+            if (!sessionStorage.getItem('introPlayed')) {
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => {
+                    new Typed('.intro-text', {
+                        strings: ['Welcome to Website Zeyrss Code'],
+                        typeSpeed: 50,
+                        showCursor: false
+                    });
+                }, 800);
+                enterBtn.addEventListener('click', () => {
+                    introOverlay.classList.add('hide-intro');
+                    document.body.style.overflow = 'auto';
+                    sessionStorage.setItem('introPlayed', 'true');
+                    bgMusic.play().catch(error => {
+                        console.log("Autoplay prevented by browser setting, user interaction required.");
+                    });
+                    setTimeout(() => {
+                        bgMusic.pause();
+                        bgMusic.currentTime = 0;
+                    }, 17000);
+                });
+            } else {
+                introOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            const r = document.querySelector(':root');
+            let rgbInterval;
+            function setColor(color) {
+                clearInterval(rgbInterval);
+                r.style.setProperty('--main-color', color);
+                localStorage.setItem('preferredColor', color);
+                document.getElementById('themeColors').classList.remove('active');
+            }
+            function startRgbMode() {
+                clearInterval(rgbInterval);
+                let hue = 0;
+                rgbInterval = setInterval(() => {
+                    hue++;
+                    const color = `hsl(${hue}, 100%, 50%)`;
+                    r.style.setProperty('--main-color', color);
+                    if (hue >= 360) hue = 0;
+                }, 20);
+                localStorage.setItem('preferredColor', 'rgb-loop');
+                document.getElementById('themeColors').classList.remove('active');
+            }
+            const savedColor = localStorage.getItem('preferredColor');
+            if(savedColor === 'rgb-loop') {
+                startRgbMode();
+            } else if(savedColor) {
+                setColor(savedColor);
+            }
+            const wrapper = document.getElementById('themeWrapper');
+            const btn = document.getElementById('themeBtn');
+            const menu = document.getElementById('themeColors');
+            let isDragging = false;
+            let startX, startY, initialLeft, initialTop;
+            let hasMoved = false;
+            function constrainToScreen() {
+                const rect = wrapper.getBoundingClientRect();
+                const winWidth = window.innerWidth;
+                const winHeight = window.innerHeight;
+                let newLeft = rect.left;
+                let newTop = rect.top;
+                if (newLeft < 10) newLeft = 10;
+                if (newLeft + rect.width > winWidth - 10) newLeft = winWidth - rect.width - 10;
+                if (newTop < 10) newTop = 10;
+                if (newTop + rect.height > winHeight - 10) newTop = winHeight - rect.height - 10;
+                wrapper.style.left = `${newLeft}px`;
+                wrapper.style.top = `${newTop}px`;
+                wrapper.style.right = 'auto'; 
+                wrapper.style.bottom = 'auto';
+            }
+            window.addEventListener('resize', () => {
+                wrapper.style.left = '';
+                wrapper.style.top = '';
+                wrapper.style.right = '20px';
+                wrapper.style.bottom = '20px';
+            });
+            btn.addEventListener('click', (e) => {
+                if (!hasMoved) {
+                    menu.classList.toggle('active');
+                }
+            });
+            function dragStart(e) {
+                if (e.target.classList.contains('color-box')) return;
+                isDragging = true;
+                hasMoved = false;
+                const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+                const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+                startX = clientX;
+                startY = clientY;
+                const rect = wrapper.getBoundingClientRect();
+                initialLeft = rect.left;
+                initialTop = rect.top;
+                wrapper.style.right = 'auto';
+                wrapper.style.bottom = 'auto';
+                wrapper.style.left = initialLeft + 'px';
+                wrapper.style.top = initialTop + 'px';
+                document.body.style.userSelect = 'none';
+            }
+            function dragMove(e) {
+                if (!isDragging) return;
+                e.preventDefault(); 
+                const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+                const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+                const dx = clientX - startX;
+                const dy = clientY - startY;
+                if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+                    hasMoved = true;
+                }
+                let newLeft = initialLeft + dx;
+                let newTop = initialTop + dy;
+                wrapper.style.left = `${newLeft}px`;
+                wrapper.style.top = `${newTop}px`;
+            }
+            function dragEnd() {
+                isDragging = false;
+                document.body.style.userSelect = 'auto';
+                constrainToScreen(); 
+            }
+            btn.addEventListener('mousedown', dragStart);
+            window.addEventListener('mousemove', dragMove);
+            window.addEventListener('mouseup', dragEnd);
+            btn.addEventListener('touchstart', dragStart, { passive: false });
+            window.addEventListener('touchmove', dragMove, { passive: false });
+            window.addEventListener('touchend', dragEnd);
+            const menuIcon = document.querySelector("#menu-icon");
+            const navbar = document.querySelector(".navbar");
+            menuIcon.onclick = () => {
+                navbar.classList.toggle("active");
+                if(navbar.classList.contains("active")) {
+                    menuIcon.innerHTML = feather.icons['x'].toSvg();
+                } else {
+                    menuIcon.innerHTML = feather.icons['menu'].toSvg();
+                }
+            };
+            let sections = document.querySelectorAll("section");
+            let navLinks = document.querySelectorAll("header nav a");
+            window.onscroll = () => {
+                sections.forEach(sec => {
+                    let top = window.scrollY;
+                    let offset = sec.offsetTop - 150;
+                    let height = sec.offsetHeight;
+                    let id = sec.getAttribute("id");
+                    if(top >= offset && top < offset + height) {
+                        navLinks.forEach(link => {
+                            link.classList.remove("active");
+                            document.querySelector('header nav a[href*=' + id + ']').classList.add("active");
+                        });
+                    }
+                });
+                let header = document.querySelector(".header");
+                header.classList.toggle("sticky", window.scrollY > 100);
+                navbar.classList.remove("active");
+                if(menuIcon) menuIcon.innerHTML = feather.icons['menu'].toSvg();
+            };
+            ScrollReveal({
+                reset: true,
+                distance: "80px",
+                duration: 2000,
+                delay: 200,
+            });
+            ScrollReveal().reveal(".home-content, .heading", { origin: "top" });
+            ScrollReveal().reveal(".home-img, .services-container, .contact form", { origin: "bottom" });
+            ScrollReveal().reveal(".home-content h1, .about-img", { origin: "left" });
+            ScrollReveal().reveal(".home-content p, .about-content", { origin: "right" });
+            ScrollReveal().reveal(".portfolio-box", { origin: "bottom", interval: 200 });
+            new Typed(".multiple-text", {
+                strings: ["Front-End", "Back-End", "Web Developer"],
+                typeSpeed: 100,
+                backSpeed: 60,
+                backDelay: 1000,
+                loop: true,
+            });
+            const form = document.getElementById("contactForm");
+            const modal = document.getElementById("waModal");
+            const okBtn = document.getElementById("waOk");
+            if(form) {
+                form.addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    const nama = document.getElementById("nama").value;
+                    const pembahasan = document.getElementById("pembahasan").value;
+                    const pesan = document.getElementById("pesan").value;
+                    const adminNumber = "6289699411645";
+                    const text = `*Halo Admin Zeyrss.Code, saya ingin bertanya.*\n\nNama: ${nama}\nTopik: ${pembahasan}\nPesan: ${pesan}`;
+                    const url = `https://wa.me/${adminNumber}?text=${encodeURIComponent(text)}`;
+                    window.open(url, "_blank");
+                    modal.classList.add("active");
+                    form.reset();
+                });
+            }
+            if(okBtn) {
+                okBtn.onclick = () => modal.classList.remove("active");
+            }
+            if(okBtn) {
+                okBtn.onclick = () => modal.classList.remove("active");
+            }
+            const imgModal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("img01");
+            const closeBtn = document.querySelector(".close-modal");
+            const detailButtons = document.querySelectorAll('.portfolio-layer a');
+            detailButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const parentBox = this.closest('.portfolio-box');
+                    const imgSource = parentBox.querySelector('img').src;
+                    modalImg.src = imgSource;
+                    imgModal.classList.add('show');
+                });
+            });
+            closeBtn.onclick = function() {
+                imgModal.classList.remove('show');
+            }
+            imgModal.onclick = function(e) {
+                if (e.target === imgModal) {
+                    imgModal.classList.remove('show');
+                }
+            }
+        </script>
+    </body>
+</html>
